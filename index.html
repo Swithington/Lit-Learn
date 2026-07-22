@@ -3862,12 +3862,16 @@ function normaliseCard(raw, addedVia){
     salience: Math.min(5, Math.max(1, parseInt(raw.salience)||3)),
     favourited: !!raw.favourited,
     evidenceCheck: !!raw.evidenceCheck,
-    consensusVerdict: raw.evidenceCheck ? String(raw.consensusVerdict||'').slice(0,200) : '',
+    // These caps were sized well below what the prompt actually asks the
+    // model to produce (a full plain-English verdict sentence, real academic
+    // paper titles) and were never touched by the earlier keyPoints
+    // truncation fix, since that fix only addressed the bullet text field.
+    consensusVerdict: raw.evidenceCheck ? String(raw.consensusVerdict||'').slice(0,400) : '',
     consensusLevel: raw.evidenceCheck && ['agree','mixed','limited','disagree'].includes(raw.consensusLevel) ? raw.consensusLevel : '',
-    evidenceQuestion: raw.evidenceCheck ? String(raw.evidenceQuestion||'').slice(0,300) : '',
+    evidenceQuestion: raw.evidenceCheck ? String(raw.evidenceQuestion||'').slice(0,400) : '',
     sourcePapers: raw.evidenceCheck && Array.isArray(raw.sourcePapers) ? raw.sourcePapers.slice(0,10).map(p=>({
-      title: String((typeof p === 'string' ? p : p.title)||'').slice(0,220),
-      source: String((typeof p === 'string' ? '' : p.source)||'').slice(0,80),
+      title: String((typeof p === 'string' ? p : p.title)||'').slice(0,400),
+      source: String((typeof p === 'string' ? '' : p.source)||'').slice(0,120),
       link: (typeof p === 'object' && p.link) ? String(p.link).slice(0,500) : ''
     })).filter(p=>p.title) : [],
     familiarity: null, reviewCount: 0, lastReviewed: null, nextDue: now,
