@@ -11,7 +11,7 @@
 // reviewing, browsing, favouriting, and rating already-built cards do not
 // touch the network at all and work fully offline once the shell is cached.
 
-const CACHE_NAME = 'gi-recall-shell-v1';
+const CACHE_NAME = 'gi-recall-shell-v2';
 
 const SHELL_URLS = [
   // Both kept even though they likely serve identical content: a browser tab
