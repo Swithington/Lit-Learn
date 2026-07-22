@@ -29,13 +29,24 @@
 The phone starts with an empty library — IndexedDB is local to that
 browser/device and has no way to know about your existing cards on its own.
 
+**If you've connected GitHub backup on the Claude.ai dashboard** (Tools →
+GitHub backup): your card library is already sitting in your repo as a
+public `cards.json`, kept current automatically. On the phone app: **Tools →
+Backup & restore → Restore from file** still expects a local file, so either
+download `cards.json` from `https://raw.githubusercontent.com/<owner>/<repo>/main/cards.json`
+in the phone's browser first, or — simpler — just use the manual export
+below once, then let GitHub backup keep the *dashboard* copy current from
+then on (the phone copy updates via Study progress sync, not by re-pulling
+cards.json each time, so you don't need to repeat this step).
+
+**Otherwise, do it manually:**
 1. On the Claude.ai dashboard: **Tools → Backup & restore → Download my cards**.
 2. On the phone app: **Tools → Backup & restore → Restore from file**, pick
    that same downloaded file, choose **Replace my whole library**.
 
-This matters beyond just seeding content: it makes the card `id`s on the
-phone identical to the ones on the Claude.ai dashboard, which is what lets
-the progress-sync file (below) reference the right cards later.
+Either way, this matters beyond just seeding content: it makes the card
+`id`s on the phone identical to the ones on the Claude.ai dashboard, which
+is what lets the progress-sync file (below) reference the right cards later.
 
 ## Day-to-day offline study
 
@@ -49,6 +60,23 @@ API): Bulk search, Add specific paper, Evidence check, Coverage checks,
 DOI/logo enrichment. Attempting these offline shows a clear message rather
 than hanging; the app also shows an amber banner whenever it detects no
 connection.
+
+## GitHub backup (dashboard only)
+
+On the Claude.ai dashboard, **Tools → GitHub backup** can push your card
+library to a file in this same repo (`cards.json` by default) automatically,
+a little while after any card is added or changed. It needs a GitHub
+personal access token, fine-grained, scoped to just this repo, with
+Contents: Read and write — nothing broader. The token is only ever sent to
+`api.github.com`; the phone app never sees or needs it, since the resulting
+file is public and readable with no authentication.
+
+This is a **separate, coarser mechanism from Study progress sync** (above) —
+it backs up the whole library's current state, not a precise merge of
+offline review events. Progress sync remains the correct way to bring study
+progress made on the phone back into the dashboard; GitHub backup is just an
+always-current second copy of your cards, useful as insurance and as a
+distribution point.
 
 ## Syncing progress back
 
