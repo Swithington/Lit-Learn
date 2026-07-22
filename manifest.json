@@ -1,0 +1,31 @@
+{
+  "name": "GI/Hep/IM Recall",
+  "short_name": "GI Recall",
+  "description": "Spaced-repetition revision dashboard for gastroenterology, hepatology, and internal medicine literature.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F5F7F5",
+  "theme_color": "#0E5C53",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
